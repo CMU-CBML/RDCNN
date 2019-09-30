@@ -1,6 +1,10 @@
 import torch
 from torch.utils import data
 from torch.utils.data.sampler import SubsetRandomSampler
+<<<<<<< HEAD
+from torch.utils.data.sampler import SequentialSampler
+=======
+>>>>>>> e3866c46f4ea3e48390a009cf47add22fe43551a
 import numpy as np
 
 import matplotlib.pyplot as plt
@@ -15,6 +19,11 @@ def DatasetSplit(dataset, test_split, shuffle_dataset, random_seed, batchsize, t
         np.random.seed(random_seed)
         np.random.shuffle(indices)
     train_indices, test_indices = indices[split:], indices[:split]
+<<<<<<< HEAD
+    # print(train_indices)
+    # print(test_indices)
+=======
+>>>>>>> e3866c46f4ea3e48390a009cf47add22fe43551a
 
     # Creating PT data samplers and loaders:
     train_sampler = SubsetRandomSampler(train_indices)
@@ -46,8 +55,13 @@ def TestPredictionPlot(model, device, testing_data_loader, k, d, fout):
             prediction = model(input)
             i = 0
             for matrix in input:
+<<<<<<< HEAD
+                if np.abs(matrix[2][0][0].item() - k) < 1e-8:  # k
+                    if np.abs(matrix[3][0][0].item() - d) < 1e-8:  # d
+=======
                 if matrix[2][0][0].item() == k:  # k
                     if matrix[3][0][0].item() == d:  # d
+>>>>>>> e3866c46f4ea3e48390a009cf47add22fe43551a
                         List_t.append(matrix[1][0][0].item())
                         List_input.append(matrix)
                         List_prediction.append(prediction[i])
@@ -97,8 +111,17 @@ def TestErrorPlot(model, device, testing_data_loader):
             tmp_error = 0
             for j in range(len(prediction)):
                 # tmp_error = torch.mean(torch.abs(prediction[j]-target[j]))/torch.abs(torch.max(target[j])-torch.min(target[j]))
+<<<<<<< HEAD
+                # tmp_error = ComputeTestError(prediction[j], target[j]) * 0.0094 / 0.014284110054473812
+                tmp_error = ComputeTestError(prediction[j], target[j])
+                # if tmp_error < 0.3:
+                    # error_List.append(tmp_error.item())
+                    # testID_List.append(count)
+                    # count += 1
+=======
                 tmp_error = ComputeTestError(
                     prediction[j], target[j]) * 0.0094 / 0.014284110054473812
+>>>>>>> e3866c46f4ea3e48390a009cf47add22fe43551a
                 error_List.append(tmp_error.item())
                 testID_List.append(count)
                 count += 1
@@ -112,8 +135,13 @@ def TestErrorPlot(model, device, testing_data_loader):
     # plt.scatter(np.asarray(testID_List), np.asarray(error_List), 'bo')
     plt.hlines(avg_error, 1, count, colors='r', zorder=2)
     fig = plt.gcf()
+<<<<<<< HEAD
+    fig.savefig("./Figure/statistics_testdata.png",
+                dpi=300, quality=100, format='png')
+=======
     fig.savefig("./Figure/statistics_testdata.svg",
                 dpi=300, quality=100, format='svg')
+>>>>>>> e3866c46f4ea3e48390a009cf47add22fe43551a
     print(avg_error)
 
 
@@ -130,7 +158,10 @@ def TestErrorCompute(model, device, testing_data_loader):
             prediction = model(input)
             tmp_error = 0
             for j in range(len(prediction)):
+<<<<<<< HEAD
+=======
                 # tmp_error = torch.mean(torch.abs(prediction[j]-target[j]))/torch.abs(torch.max(target[j])-torch.min(target[j]))
+>>>>>>> e3866c46f4ea3e48390a009cf47add22fe43551a
                 tmp_error = ComputeTestError(prediction[j], target[j])
                 error_List.append(tmp_error.item())
                 testID_List.append(count)
@@ -158,7 +189,12 @@ def ComputeTestError(prediction, target):
     # tmp_error = torch.mean(torch.abs(prediction-target))/torch.abs(torch.max(target)-torch.min(target))
     # tmp_error = torch.mean(torch.abs(prediction-target)**2)/torch.abs(torch.max(target))
     # tmp_error = torch.sqrt(torch.abs(prediction-target).pow(2).sum())/prediction.numel()/torch.abs(torch.max(target)-torch.min(target))
+<<<<<<< HEAD
+    # tmp_error = torch.sqrt(torch.mean(torch.abs(prediction-target)**2))/torch.abs(torch.max(target))
+    tmp_error = torch.sqrt(torch.mean((prediction-target)**2))/torch.abs(torch.max(target)-torch.min(target))
+=======
     tmp_error = torch.sqrt(torch.mean(
         torch.abs(prediction-target)**2))/torch.abs(torch.max(target))
+>>>>>>> e3866c46f4ea3e48390a009cf47add22fe43551a
     # tmp_error = torch.mean(torch.abs(prediction-target)**2)/torch.abs(torch.max(target)-torch.min(target))
     return tmp_error
