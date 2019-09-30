@@ -9,7 +9,7 @@ User can run the code following the steps below.
 
 * **Description:** this code is used to generate the dataset using FEM.
 * **Input:**
-    * controlmesh.vtk (control mesh file)
+    * mesh_21_21.vtk (Quadrilateral mesh for domain geometry)
 * **Output:**
     * geometry_X_Y_input.txt (the input data storing boundary condition corresponding to Xth geometry and Yth parameter settings)
     * mesh_X.txt (the output data storing concentration results)
