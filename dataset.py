@@ -4,7 +4,6 @@ import os
 import glob
 import pandas as pd
 import numpy as np
-<<<<<<< HEAD
 import h5py
 import re
 import sys
@@ -141,30 +140,6 @@ class rdDataset_old(data.Dataset):
 
         return matrix_input, matrix_output
 
-=======
-import re
-
-
-def read_files_array(filename):
-    # f = open(filename, 'r')
-    # row_data = []
-    # row_data = [line.split() for line in f]
-
-    # matrix = np.array([])
-    # matrix.resize((21, 21))
-
-    # for i in range(len(row_data)):
-    #     col = int(row_data[i][0])
-    #     row = int(row_data[i][1])
-    #     val = float(row_data[i][2])
-    #     matrix[col][row] = val
-    # f.close()
-
-    row_data = np.loadtxt(filename)
-    matrix = np.resize(row_data[:,2],(21,21))
-
-    return matrix
->>>>>>> e3866c46f4ea3e48390a009cf47add22fe43551a
 
 # 4-channel Dataset
 # class rdDataset(data.Dataset):
