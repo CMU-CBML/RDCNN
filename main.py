@@ -54,13 +54,6 @@ from model import rdcnn_2
 # learning_rate = opt.lr
 # drop_rate = opt.dropout_rate
 
-# For debugging
-import sys
-sys.path.append("pydevd-pycharm.egg")
-
-import pydevd_pycharm
-pydevd_pycharm.settrace('localhost', port=8081, stdoutToServer=True, stderrToServer=True)
-
 use_cuda = torch.cuda.is_available()
 device = torch.device("cuda:0" if use_cuda else "cpu")
 path = './data_bc'
@@ -147,74 +140,3 @@ for epoch in range(1, max_epoches + 1):
     L_test_loss.append(test_loss)
     L_test_error.append(test_error)
 
-# def train(epoch):
-#     epoch_loss = 0
-#     for iteration, batch in enumerate(training_data_loader, 1):
-#         input, target = batch[0].to(device, torch.float), batch[1].to(device, torch.float)
-#         optimizer.zero_grad()
-#         loss = criterion(model(input), target)
-#         epoch_loss += loss.item()
-#         loss.backward()
-#         optimizer.step()
-#
-# #         print("===> Epoch[{}]({}/{}): Loss: {:.4f}".format(epoch, iteration, len(training_data_loader), loss.item()))
-#
-#     print("===> Epoch {} Complete: Avg. Loss: {:.4f}".format(epoch, epoch_loss / len(training_data_loader)))
-#     return epoch, epoch_loss / len(training_data_loader)
-#
-# def test():
-#     avg_error = 0
-#     avg_loss = 0
-#     with torch.no_grad():
-#         for batch in testing_data_loader:
-#             input, target = batch[0].to(device, torch.float), batch[1].to(device, torch.float)
-#
-#             prediction = model(input)
-#             tmp_error = 0
-# #             print(len(prediction))
-#             for j in range(len(prediction)):
-#                 tmp_error += torch.mean((prediction[j]-target[j])**2/torch.max(target[j]))
-#             avg_error += tmp_error / len(prediction)
-#             mse = criterion(prediction, target)
-#             avg_loss += mse
-#     print("===> Avg. Loss: {:.4f} ".format(avg_loss / len(testing_data_loader)))
-#     print("===> Avg. Error: {:.4f} ".format(avg_error / len(testing_data_loader)))
-#     return avg_loss / len(testing_data_loader),avg_error / len(testing_data_loader)
-#
-# def checkpoint(epoch):
-#     model_out_path = "./checkpoint_largedata2/model_epoch_{}.pth".format(epoch)
-#     torch.save(model, model_out_path)
-#     print("Checkpoint saved to {}".format(model_out_path))
-#
-# L_train_loss = []
-# L_test_loss = []
-# L_test_error = []
-# for epoch in range(1, max_epoches + 1):
-#     train_loss = train(epoch)
-#     test_loss,test_error = test()
-#     checkpoint(epoch)
-#     data.TestErrorPlot(model,device, testing_data_loader)
-#     L_train_loss.append(train_loss)
-#     L_test_loss.append(test_loss)
-#     L_test_error.append(test_error)
-
-# data.TestErrorPlot(model,device, testing_data_loader)
-
-
-# with torch.no_grad():
-#     for batch in testing_data_loader:
-#         input, target = batch[0].to(device, torch.float), batch[1].to(device, torch.float)
-
-#         prediction = model(input)
-        
-# for t in range(len(prediction)):
-#     fig, ax = plt.subplots(1,2, figsize=(10,5))
-
-#     im = ax[0].imshow(prediction[t][0].cpu(),cmap = "jet")
-#     im = ax[1].imshow(target[t][0].cpu(),cmap = "jet")
-
-#     fig.subplots_adjust(right=0.8)
-#     cbar_ax = fig.add_axes([0.84, 0.27, 0.01, 0.47])
-#     fig.colorbar(im, cax=cbar_ax)
-
-# plt.show()

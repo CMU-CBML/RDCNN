@@ -1,3 +1,4 @@
 {
-    "python.dataScience.jupyterServerURI": "http://localhost:8888/?token=cbc5d9326f2db8bfa8b61f0900d1035137c08cc5cbc98382"
+    "python.dataScience.jupyterServerURI": "http://localhost:8888/?token=cbc5d9326f2db8bfa8b61f0900d1035137c08cc5cbc98382",
+    "python.pythonPath": "/export/home/math/angranl/anaconda3/bin/python"
 }
